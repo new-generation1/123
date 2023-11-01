@@ -1,0 +1,118 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    form {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    button[type="submit"] {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+<h1>Регистрация</h1>
+<form id="registrationForm">
+    <label for="username">Имя:</label>
+    <input type="text" id="username" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" required>
+
+    <label for="confirmPassword">Подтверждение:</label>
+    <input type="password" id="confirmPassword" required>
+
+    <button type="submit">Регистрация</button>
+</form>
+
+<h1>Авторизация</h1>
+<form id="loginForm">
+    <label for="loginUsername">Имя:</label>
+    <input type="text" id="loginUsername" required>
+
+    <label for="loginPassword">Пароль:</label>
+    <input type="password" id="loginPassword" required>
+
+    <button type="submit">Войти</button>
+</form>
+<script>
+    const users = [
+        { username: "user1", password: "password1" },
+        { username: "user2", password: "password2" }
+    ];
+    
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+    
+        const regUsername = document.getElementById("regUsername").value;
+        const regPassword = document.getElementById("regPassword").value;
+    
+        if (users.some(user => user.username === regUsername)) {
+            alert("Пользователь уже существует.");
+            return;
+        }
+    
+        users.push({ username: regUsername, password: regPassword });
+        alert("Регистрация прошла успешно.");
+        document.getElementById("registrationForm").reset();
+    });
+    
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+    
+        const loginUsername = document.getElementById("loginUsername").value;
+        const loginPassword = document.getElementById("loginPassword").value;
+    
+        const user = users.find(user => user.username === loginUsername && user.password === loginPassword);
+    
+        if (user) {
+            alert("Вход выполнен успешно.");
+            document.getElementById("loginForm").reset();
+        } else {
+            alert("Неправильное имя пользователя или пароль.");
+        }
+    });</script>
